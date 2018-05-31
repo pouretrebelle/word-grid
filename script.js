@@ -7,6 +7,7 @@ fs.readFile('fourletters.json', function(err, data) {
 
 function process(data) {
   data = JSON.parse(data);
+  var grids = [];
 
   var length = data.length;
   for (var a = 0; a < length; a++) {
@@ -43,8 +44,7 @@ function process(data) {
               ) {
 
                 // it works!
-                console.log('----');
-                console.log([data[a], data[b], data[c], data[d]].join('\n'));
+                grids.push([data[a], data[b], data[c], data[d]].join('\n').toUpperCase());
               }
             }
           }
@@ -52,4 +52,9 @@ function process(data) {
       }
     }
   }
+
+  fs.writeFile('grids.txt', grids.join('\n\n'), function(err) {
+    if (err) return console.log(err);
+    console.log(`found ${grids.length} word grids`);
+  });
 };
