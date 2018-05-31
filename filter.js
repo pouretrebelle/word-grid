@@ -1,5 +1,6 @@
 var fs = require('fs');
 var fourLetters = [];
+var wordLimit = 500;
 
 function readLines(input, func) {
   var remaining = "";
@@ -31,7 +32,7 @@ function readLines(input, func) {
 }
 
 function func(line) {
-  if (line.length === 4) fourLetters.push(line);
+  if (line.length === 4 && fourLetters.length < wordLimit) fourLetters.push(line);
 }
 
 var input = fs.createReadStream('en.txt');
