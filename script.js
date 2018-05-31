@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-fs.readFile('fourletters.json', function(err, data) {
+fs.readFile('words.json', function(err, data) {
   if (err) throw err;
   process(data);
 });
@@ -43,8 +43,34 @@ function process(data) {
                   data[d][2] === data[c][3]
               ) {
 
-                // it works!
-                grids.push([data[a], data[b], data[c], data[d]].join('\n').toUpperCase());
+
+                // if the third word works
+                for (var e = 0; e < length; e++) {
+                  if (
+                      // not the same word
+                      a !== e &&
+                      // first letter of e is the fifth letter of a
+                      data[e][0] === data[a][4] &&
+                      // second letter of e is the fifth letter of b
+                      data[e][1] === data[b][4] &&
+                      // third letter of e is the fifth letter of c
+                      data[e][2] === data[c][4] &&
+                      // third letter of e is the fifth letter of d
+                      data[e][3] === data[d][4]
+                  ) {
+
+                    // it works!
+                    grids.push([
+                        data[a],
+                        data[b],
+                        data[c],
+                        data[d],
+                        data[e],
+                      ]
+                        .join('\n')
+                        .toUpperCase());
+                  }
+                }
               }
             }
           }

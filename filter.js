@@ -1,6 +1,6 @@
 var fs = require('fs');
-var fourLetters = [];
-var wordLimit = 500;
+var words = [];
+var wordLimit = 800;
 
 function readLines(input, func) {
   var remaining = "";
@@ -24,15 +24,15 @@ function readLines(input, func) {
       func(remaining);
     }
 
-    fs.writeFile('fourletters.json', JSON.stringify(fourLetters), 'utf8', function(err) {
+    fs.writeFile('words.json', JSON.stringify(words), 'utf8', function(err) {
       if (err) return console.log(err);
-      console.log(`${fourLetters.length} words saved`);
+      console.log(`${words.length} words saved`);
     });
   });
 }
 
 function func(line) {
-  if (line.length === 4 && fourLetters.length < wordLimit) fourLetters.push(line);
+  if (line.length === 5 && words.length < wordLimit) words.push(line);
 }
 
 var input = fs.createReadStream('en.txt');
